@@ -1,0 +1,17 @@
+html {
+    font-family: "Nunito", "Comfortaa", sans-serif;
+}
+body {
+    width: 50%;
+    max-width: 2000px;
+    min-width: 480px;
+    margin: 0 auto;
+    text-align: center;
+}
+.content {
+    width: 1000px;
+}
+
+h1 {
+    text-align: center;
+}
