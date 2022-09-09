@@ -1,16 +1,3 @@
-// Changes number of grid divs
-// function refreshGrid(event) {
-//     event.target.value === null ? let input = 16; : let input = event.target.value;
-//     //event.target.setAttribute('class', 'filled'); 
-//     divGrid = [];
-//     for(var i = 0; i < INPUT; i++) {
-//         divGrid[i]=document.createElement("div");// create new div
-//         content.appendChild(divGrid[i]);// add to dom
-//         divGrid[i].addEventListener('mouseover', changeColor);// Add color change on hover
-        
-//     }
-// }
-
 // Changes color of grid divs
 function changeColor(event) {
     event.target.setAttribute('class', 'filled'); 
@@ -20,59 +7,58 @@ function changeColor(event) {
 const heading = document.getElementById('heading');
 const content = document.getElementById("content");
 
-// Create grid
-var divGrid = [];
-for(var i = 0; i < 256; i++) {
-    divGrid[i] = document.createElement("div");// create new div
-    divGrid[i].setAttribute('class', 'gridlet');
-    content.appendChild(divGrid[i]);// add to dom
-    divGrid[i].addEventListener('mouseover', changeColor);// Add color change on hover    
+// Create grid - content child
+let divGrid = [];
+for(let i = 0; i < 256; i++) {
+    divGrid[i] = document.createElement("div"); // create
+    divGrid[i].setAttribute('class', 'gridlet'); // add styling
+    content.appendChild(divGrid[i]); // add to dom
+    divGrid[i].addEventListener('mouseover', changeColor); // change  on hover    
 }
 
-
-// Create popup
+// Create popup - header child
 const popup = document.createElement('div');
 popup.setAttribute('id', 'popup');
-popup.style.display = 'none';
-heading.appendChild(popup);// add hidden popup to dom
+popup.style.display = 'none'; // hide
+heading.appendChild(popup);// add to header
 
-// Create button
+// Create button - header child
 const newGrid = document.createElement('button');
 newGrid.textContent = 'new sketch';// add inner text
 newGrid.onclick = function openPopup() { // open popup on click
     popup.style.display = "block";
 };
-heading.appendChild(newGrid);// add to dom
+heading.appendChild(newGrid); // add to header
 
-// Popup content
+// Popup content  - popup child
 const popupContent = document.createElement('div');
 popupContent.setAttribute('class', 'popup-content');
-popup.appendChild(popupContent);// add content to popup div
+popup.appendChild(popupContent); // add to popup div
 
-// Close Icon
+// Close Icon - popup child
 const closeIcon = document.createElement('span');
 closeIcon.setAttribute('class', 'close');
 closeIcon.textContent = '✕';
-closeIcon.onclick = function() {popup.style.display = "none";};
-popupContent.appendChild(closeIcon);// add close icon to popup content
+closeIcon.onclick = function() {popup.style.display = "none";}; // hide popup on click
+popupContent.appendChild(closeIcon);// add close icon to popup
 
-// heading
+// Heading - popup child
 const popupHeading = document.createElement('h3');
 popupHeading.textContent = "Create new sketch";
 popupContent.appendChild(popupHeading);
 
-// Paragraph
+// Paragraph - popup child
 const midText = document.createElement('p');
 midText.setAttribute('class', 'midText');
 midText.textContent = "For images with more detail, choose larger dimensions.\n For less detail, choose a smaller dimensions.\n To return to your sketch, exit this window."
 popupContent.appendChild(midText);
 
-// Slider container
+// Slider container - popup child
 const sliderDiv = document.createElement('div');
 sliderDiv.setAttribute('class', 'slidecontainer');
 popupContent.appendChild(sliderDiv);
 
-// Slider <input type="range" min="16" max="100" value="16" id="slider">
+// Slider - slider child
 const slider = document.createElement('input');
 slider.setAttribute('id', 'slider');
 slider.setAttribute('value', '16');
@@ -81,52 +67,50 @@ slider.setAttribute('min', '16');
 slider.setAttribute('type', 'range');
 sliderDiv.appendChild(slider);
 
-// Dimensions label <p>Dimensions: <span id="dimensions"></span></p>
+// Dimensions label - slider child
 const subText = document.createElement('p');
 subText.textContent = 'Dimensions';
 sliderDiv.appendChild(subText);
 
-// Dimensions output
+// Dimensions output - slider child
 const dimensions = document.createElement('span');
 dimensions.setAttribute('id', 'dimensions');
 dimensions.textContent = '';
 sliderDiv.appendChild(dimensions);
+
+// Add spacing - slider child
 const lineBreak = document.createElement('br');
 sliderDiv.appendChild(lineBreak);
 const lineBreak2 = document.createElement('br');
 sliderDiv.appendChild(lineBreak2);
 
-// add slider input to span
+// add slider input to dimensions output
 slider.oninput = function() {
     dimensions.textContent = this.value + ' x ' + this.value;
 }
 
-// Submit button
+// Submit button - slider child
 const submit = document.createElement('button');
 submit.setAttribute('class', 'submit');
 submit.textContent = 'create';
 submit.onclick = function refreshGrid(event) {
     let input = dimensions.textContent;
-    let size = 0;
     if (!dimensions.textContent) {
         input = 16; // set default to 16 px
     } else {
             let index = input.search(" ");
             input = parseInt(input.slice(0, index));
-            console.log("input", input);
     }
     // Calculate new width/height: content size / number of divs - border thickness
     let width = (650 / input) - 2 + "px";
-    console.log("width:", width);
 
     // Clear old grid
-    for(var i = 0; i < divGrid.length; i++){
+    for(let i = 0; i < divGrid.length; i++){
         divGrid[i].remove();
     }
-    console.log("grid removed");
     
     // Create new grid
-    for(var i = 0; i < input ** 2; i++) {
+    for(let i = 0; i < input ** 2; i++) {
         divGrid[i]=document.createElement("div");// create new div
         divGrid[i].setAttribute('class', 'gridlet');
         divGrid[i].setAttribute('style', `width: ${width}; height: ${width};`);
@@ -136,36 +120,3 @@ submit.onclick = function refreshGrid(event) {
     popup.style.display = "none";
 }
 sliderDiv.appendChild(submit);
-
-
-
-
-/*
-<div id="myPopup" class="popup">
-**didn't add id
-  <div class="popup-content">
-    <span class="close">&times;</span>
-    <p>Some text in the popup.</p>
-    <!-- Slide sizer -->
-    <div class="slidecontainer">
-        <input type="range" min="16" max="100" value="16" class="slider" id="slider">
-        <p>Dimensions: <span id="dimensions"></span></p>
-    </div>
-    <button class=submit onClick=refreshGrid></button>
-  </div>
-
-// Add event listener to popup buttons
-// slider element
-var slider = document.getElementById("myRange");
-var output = document.getElementById("dimensions");
-output.innerHTML = "";
-
-slider.oninput = function() {
-  output.innerHTML = this.value + " x " + this.value;
-}
-</script>
-
-</body>
-</html>
-
-*/
