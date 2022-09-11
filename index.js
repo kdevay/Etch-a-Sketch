@@ -3,36 +3,75 @@ function changeColor(event) {
     event.target.setAttribute('class', 'filled'); 
 }
 
-// Import content
-const heading = document.getElementById('heading');
-const content = document.getElementById("content");
+// Import body div
+const bodyDiv = document.getElementById("bodyDiv");
+
+// Create content div
+const content = document.createElement("div");
+content.setAttribute('id', 'content');
+bodyDiv.appendChild(content);
+
+
+// Create header div - content child
+const headerDiv = document.createElement('div');
+headerDiv.setAttribute('id', 'heading');
+content.appendChild(headerDiv);
+
+// Create header - header div child
+const header = document.createElement('h1');
+header.setAttribute('class', 'font-effect-emboss');
+header.textContent = 'Swipe A Sketch';
+headerDiv.appendChild(header);
+
+
+// Create Grid container
+const gridDiv = document.createElement('div');
+gridDiv.setAttribute('id', 'gridDiv');
+content.appendChild(gridDiv);
 
 // Create grid - content child
 let divGrid = [];
 for(let i = 0; i < 256; i++) {
     divGrid[i] = document.createElement("div"); // create
     divGrid[i].setAttribute('class', 'gridlet'); // add styling
-    content.appendChild(divGrid[i]); // add to dom
+    gridDiv.appendChild(divGrid[i]); // add to dom
     divGrid[i].addEventListener('mouseover', changeColor); // change  on hover    
 }
 
-// Create popup - header child
+
+// Create left popup - header child
 const popup = document.createElement('div');
 popup.setAttribute('id', 'popup');
 popup.style.display = 'none'; // hide
 heading.appendChild(popup);// add to header
 
-// Create button - header child
-const newGrid = document.createElement('button');
-newGrid.textContent = 'new sketch';// add inner text
-newGrid.onclick = function openPopup() { // open popup on click
+
+// Create dials 
+const dialDiv = document.createElement('div'); // dial container
+dialDiv.setAttribute('class', 'dialDiv');
+content.appendChild(dialDiv); 
+// left dial
+const leftDial = document.createElement('button'); 
+leftDial.setAttribute('class', 'dial');
+leftDial.setAttribute('title', 'resize grid');
+leftDial.onclick = function openPopup() { // open popup on click
+    popup.style.display = "block"; 
+};
+dialDiv.appendChild(leftDial); // add to dial div
+// right dial
+const rightDial = document.createElement('button');// right dial
+rightDial.setAttribute('class', 'dial');
+rightDial.setAttribute('title', 'about me');
+rightDial.onclick = function openAboutPopup() { // open about popup on click
     popup.style.display = "block";
 };
-heading.appendChild(newGrid); // add to header
+dialDiv.appendChild(rightDial); // add to dial div
 
-// Popup content  - popup child
+
+// Left popup content  - popup child
 const popupContent = document.createElement('div');
 popupContent.setAttribute('class', 'popup-content');
+// popupContent.setAttribute('id', 'popup');
 popup.appendChild(popupContent); // add to popup div
 
 // Close Icon - popup child
@@ -41,6 +80,7 @@ closeIcon.setAttribute('class', 'close');
 closeIcon.textContent = '✕';
 closeIcon.onclick = function() {popup.style.display = "none";}; // hide popup on click
 popupContent.appendChild(closeIcon);// add close icon to popup
+// popup.appendChild(closeIcon);// add close icon to popup
 
 // Heading - popup child
 const popupHeading = document.createElement('h3');
@@ -50,7 +90,7 @@ popupContent.appendChild(popupHeading);
 // Paragraph - popup child
 const midText = document.createElement('p');
 midText.setAttribute('class', 'midText');
-midText.textContent = "For images with more detail, choose larger dimensions.\n For less detail, choose a smaller dimensions.\n To return to your sketch, exit this window."
+midText.textContent = "For more detail, choose larger dimensions.\n For less detail, choose a smaller dimensions.\n To return to your sketch, exit this window."
 popupContent.appendChild(midText);
 
 // Slider container - popup child
@@ -69,7 +109,8 @@ sliderDiv.appendChild(slider);
 
 // Dimensions label - slider child
 const subText = document.createElement('p');
-subText.textContent = 'Dimensions';
+subText.textContent = 'Dimensions:\u00A0\u00A0';
+subText.setAttribute('class', 'dimensionLabel');
 sliderDiv.appendChild(subText);
 
 // Dimensions output - slider child
@@ -102,7 +143,7 @@ submit.onclick = function refreshGrid(event) {
             input = parseInt(input.slice(0, index));
     }
     // Calculate new width/height: content size / number of divs - border thickness
-    let width = (650 / input) - 2 + "px";
+    let width = (550 / input) - 2 + "px";
 
     // Clear old grid
     for(let i = 0; i < divGrid.length; i++){
@@ -115,8 +156,48 @@ submit.onclick = function refreshGrid(event) {
         divGrid[i].setAttribute('class', 'gridlet');
         divGrid[i].setAttribute('style', `width: ${width}; height: ${width};`);
         divGrid[i].addEventListener('mouseover', changeColor);// Add color change on hover
-        content.appendChild(divGrid[i]); // add to dom
+        gridDiv.appendChild(divGrid[i]); // add to dom
     }
     popup.style.display = "none";
 }
 sliderDiv.appendChild(submit);
+
+
+
+
+// //// Second popup ////
+// // Contact popup content  - popup child
+// const popupContent2 = document.createElement('div');
+// popupContent2.setAttribute('class', 'popup-content');
+// popupContent2.setAttribute('id', 'popup-right');
+// popup.appendChild(popupContent2); // add to popup div
+// //**** might have to make a different popup div
+
+// // Close Icon - popup child
+// const closeIcon2 = document.createElement('span');
+// closeIcon2.setAttribute('class', 'close');
+// closeIcon2.textContent = '✕';
+// closeIcon2.onclick = function() {popup.style.display = "none";}; // hide popup on click
+// popupContent2.appendChild(closeIcon2);// add close icon to popup
+
+// // Heading - popup child
+// const popupHeading2 = document.createElement('h3');
+// popupHeading2.textContent = "About Me";
+// popupContent2.appendChild(popupHeading2);
+
+// // body
+// const midtext2 = document.createElement('p');
+// midText2.textContent = "My name is Kat de Vay, and I am a full-stack web developer.";
+// const contact = document.createElement('p'); 
+// midText2.textContent = "Check out my other projects by following the github link below.";
+// popupContent2.appendChild(midText2);
+// popupContent2.appendChild(contact);
+
+// // Add github link
+// const gitLink = document.createElement('a');
+// gitLink.setAttribute('href', 'https://github.com/kdevay');
+// const octocat = document.createElement('img');
+// octocat.setAttribute('alt', 'octocat');
+// octocat.setAttribute('src', 'octocat.png');
+// gitLink.appendChild(octocat);
+// popupContent2.appendChild(gitLink);
