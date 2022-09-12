@@ -28,5 +28,5 @@ I used google's font api for the headings, github's "Inverted Octocat logo" to l
   https://www.w3schools.com/howto/howto_js_rangeslider.asp
   
  
- * In compliance with W3schools' fair use and terms of service, I did not copy any code and methodology verbatim. Link to terms of service below:
-    https://www.w3schools.com/about/about_copyright.asp
+* In compliance with W3schools' fair use and terms of service, I did not copy any code and methodology verbatim. Link to terms of service below:
+  https://www.w3schools.com/about/about_copyright.asp
