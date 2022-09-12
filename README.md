@@ -12,6 +12,7 @@ The range is 16x16 - 100x100, which amounts to 256 - 10,000 dynamically created 
 Clicking on the right dial will open a modal with a small "about me" section, with a link to my github account.
 
 
+
 ATTRIBUTIONS:
 I used google's font api for the headings, github's "Inverted Octocat logo" to link my github account, and I learned to build modals and range slider with W3schools**.
 
@@ -27,6 +28,7 @@ I used google's font api for the headings, github's "Inverted Octocat logo" to l
 - range slider:
   https://www.w3schools.com/howto/howto_js_rangeslider.asp
   
+ 
  
 ** In compliance with W3schools' fair use and terms of service, I did not copy any code and methodology verbatim. Link to terms of service below:
   https://www.w3schools.com/about/about_copyright.asp
