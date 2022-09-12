@@ -45,6 +45,13 @@ popup.setAttribute('id', 'popup');
 popup.style.display = 'none'; // hide
 heading.appendChild(popup);// add to header
 
+// Create right popup - header child
+const popup2 = document.createElement('div');
+popup2.setAttribute('id', 'popup2');
+popup2.style.display = 'none'; // hide
+heading.appendChild(popup2);// add to header
+
+
 
 // Create dials 
 const dialDiv = document.createElement('div'); // dial container
@@ -63,42 +70,41 @@ const rightDial = document.createElement('button');// right dial
 rightDial.setAttribute('class', 'dial');
 rightDial.setAttribute('title', 'about me');
 rightDial.onclick = function openAboutPopup() { // open about popup on click
-    popup.style.display = "block";
+    popup2.style.display = "block";
 };
 dialDiv.appendChild(rightDial); // add to dial div
 
 
-// Left popup content  - popup child
+
+// LEFT popup content 
 const popupContent = document.createElement('div');
 popupContent.setAttribute('class', 'popup-content');
-// popupContent.setAttribute('id', 'popup');
 popup.appendChild(popupContent); // add to popup div
 
-// Close Icon - popup child
+// Close Icon - p.content child
 const closeIcon = document.createElement('span');
 closeIcon.setAttribute('class', 'close');
 closeIcon.textContent = '✕';
 closeIcon.onclick = function() {popup.style.display = "none";}; // hide popup on click
 popupContent.appendChild(closeIcon);// add close icon to popup
-// popup.appendChild(closeIcon);// add close icon to popup
 
-// Heading - popup child
+// Heading - p.content child
 const popupHeading = document.createElement('h3');
 popupHeading.textContent = "Create new sketch";
 popupContent.appendChild(popupHeading);
 
-// Paragraph - popup child
+// Paragraph - p.content child
 const midText = document.createElement('p');
 midText.setAttribute('class', 'midText');
 midText.textContent = "For more detail, choose larger dimensions.\n For less detail, choose a smaller dimensions.\n To return to your sketch, exit this window."
 popupContent.appendChild(midText);
 
-// Slider container - popup child
+// Slider container - p.content child
 const sliderDiv = document.createElement('div');
 sliderDiv.setAttribute('class', 'slidecontainer');
 popupContent.appendChild(sliderDiv);
 
-// Slider - slider child
+// Slider - sliderx child
 const slider = document.createElement('input');
 slider.setAttribute('id', 'slider');
 slider.setAttribute('value', '16');
@@ -165,39 +171,39 @@ sliderDiv.appendChild(submit);
 
 
 
-// //// Second popup ////
-// // Contact popup content  - popup child
-// const popupContent2 = document.createElement('div');
-// popupContent2.setAttribute('class', 'popup-content');
-// popupContent2.setAttribute('id', 'popup-right');
-// popup.appendChild(popupContent2); // add to popup div
-// //**** might have to make a different popup div
+//// Right popup ////
+// Right popup content  - popup2 child
+const popupContent2 = document.createElement('div');
+popupContent2.setAttribute('class', 'popup-content');
+popupContent2.setAttribute('id', 'popup-right');
+popup2.appendChild(popupContent2); // add to popup div
+//**** might have to make a different popup div
 
-// // Close Icon - popup child
-// const closeIcon2 = document.createElement('span');
-// closeIcon2.setAttribute('class', 'close');
-// closeIcon2.textContent = '✕';
-// closeIcon2.onclick = function() {popup.style.display = "none";}; // hide popup on click
-// popupContent2.appendChild(closeIcon2);// add close icon to popup
+// Close Icon - popup content child
+const closeIcon2 = document.createElement('span');
+closeIcon2.setAttribute('class', 'close');
+closeIcon2.textContent = '✕';
+closeIcon2.onclick = function() {popup2.style.display = "none";}; // hide popup on click
+popupContent2.appendChild(closeIcon2);// add close icon to popup
 
-// // Heading - popup child
-// const popupHeading2 = document.createElement('h3');
-// popupHeading2.textContent = "About Me";
-// popupContent2.appendChild(popupHeading2);
+// Heading - popup child
+const popupHeading2 = document.createElement('h3');
+popupHeading2.textContent = "About Me";
+popupContent2.appendChild(popupHeading2);
 
-// // body
-// const midtext2 = document.createElement('p');
-// midText2.textContent = "My name is Kat de Vay, and I am a full-stack web developer.";
-// const contact = document.createElement('p'); 
-// midText2.textContent = "Check out my other projects by following the github link below.";
-// popupContent2.appendChild(midText2);
-// popupContent2.appendChild(contact);
+// body
+const intro = document.createElement('p');
+intro.textContent = "My name is Kat de Vay, and I am a full-stack web developer.";
+const contact = document.createElement('p'); 
+contact.textContent = "Check out my other projects by following the github link below.";
+popupContent2.appendChild(intro);
+popupContent2.appendChild(contact);
 
-// // Add github link
-// const gitLink = document.createElement('a');
-// gitLink.setAttribute('href', 'https://github.com/kdevay');
-// const octocat = document.createElement('img');
-// octocat.setAttribute('alt', 'octocat');
-// octocat.setAttribute('src', 'octocat.png');
-// gitLink.appendChild(octocat);
-// popupContent2.appendChild(gitLink);
+// Add github link
+const gitLink = document.createElement('a');
+gitLink.setAttribute('href', 'https://github.com/kdevay');
+const octocat = document.createElement('img');
+octocat.setAttribute('alt', 'octocat');
+octocat.setAttribute('src', 'octocat.png');
+gitLink.appendChild(octocat);
+popupContent2.appendChild(gitLink);

@@ -148,7 +148,7 @@ button.submit:hover{
 }
 
 /* Popup window */
-#popup {
+#popup, #popup2 {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
