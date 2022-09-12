@@ -13,7 +13,7 @@ Clicking on the right dial will open a modal with a small "about me" section, wi
 
 
 ATTRIBUTIONS:
-I used google's font api for the headings, github's "Inverted Octocat logo" to link my github account, and I learned to build modals and range slider with W3schools*.
+I used google's font api for the headings, github's "Inverted Octocat logo" to link my github account, and I learned to build modals and range slider with W3schools**.
 
 - Font:
   LilyScriptOne-Regular.ttf: Copyright (c) 2012-2013, Julia Petretta (www.juliapetretta.com julia.petretta@googlemail.com), with Reserved Font Name 'Lily'
@@ -28,5 +28,5 @@ I used google's font api for the headings, github's "Inverted Octocat logo" to l
   https://www.w3schools.com/howto/howto_js_rangeslider.asp
   
  
-* In compliance with W3schools' fair use and terms of service, I did not copy any code and methodology verbatim. Link to terms of service below:
+** In compliance with W3schools' fair use and terms of service, I did not copy any code and methodology verbatim. Link to terms of service below:
   https://www.w3schools.com/about/about_copyright.asp
