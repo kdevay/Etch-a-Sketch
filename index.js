@@ -94,10 +94,20 @@ popupHeading.textContent = "Create new sketch";
 popupContent.appendChild(popupHeading);
 
 // Paragraph - p.content child
-const midText = document.createElement('p');
-midText.setAttribute('class', 'midText');
-midText.textContent = "For more detail, choose larger dimensions.\n For less detail, choose a smaller dimensions.\n To return to your sketch, exit this window."
-popupContent.appendChild(midText);
+const midText1 = document.createElement('p');
+midText1.setAttribute('class', 'midText');
+midText1.textContent = "For more detail, choose larger dimensions.";
+popupContent.appendChild(midText1);
+const midText2 = document.createElement('p');
+midText2.setAttribute('class', 'midText');
+midText2.textContent = "For less detail, choose a smaller dimensions.";
+popupContent.appendChild(midText2);
+const midText3 = document.createElement('p');
+midText3.setAttribute('class', 'midText');
+midText3.textContent = "To return to your sketch, exit this window.";
+popupContent.appendChild(midText3);
+popupContent.appendChild(document.createElement('br'));
+
 
 // Slider container - p.content child
 const sliderDiv = document.createElement('div');
@@ -137,6 +147,8 @@ slider.oninput = function() {
 }
 
 // Submit button - slider child
+sliderDiv.appendChild(document.createElement('br'));
+sliderDiv.appendChild(document.createElement('br'));
 const submit = document.createElement('button');
 submit.setAttribute('class', 'submit');
 submit.textContent = 'create';
