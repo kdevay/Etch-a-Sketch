@@ -161,7 +161,7 @@ submit.onclick = function refreshGrid(event) {
             input = parseInt(input.slice(0, index));
     }
     // Calculate new width/height of each gridlet
-    let width = (550 / input) - 2 + "px";// content size / number of divs - border thickness
+    let width = (550 / input) - 3.5 + "px";// content size / number of divs - border thickness
 
     // Clear old grid
     for(let i = 0; i < divGrid.length; i++){
