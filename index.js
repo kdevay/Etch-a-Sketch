@@ -6,217 +6,217 @@ function changeColor(event) {
 // Import root div
 const root = document.getElementById("root");
 
-// Create Etch-A-Sketch div
+
+// Create Etch-A-Sketch module
 const etchAsketch = document.createElement("div");
 etchAsketch.setAttribute('id', 'etchAsketch');
 root.appendChild(etchAsketch);
 
 
-// Create logo div - Etch-A-Sketch child
-const logoDiv = document.createElement('div'); // headerDiv = logoDiv
+// Logo div 
+const logoDiv = document.createElement('div'); 
 logoDiv.setAttribute('id', 'logoDiv'); 
 etchAsketch.appendChild(logoDiv);
-
-// Create logo - logo div child
-const logo = document.createElement('h1');
+const logo = document.createElement('h1'); 
+// Logo
 logo.setAttribute('class', 'font-effect-emboss');
 logo.textContent = 'Swipe A Sketch';
 logoDiv.appendChild(logo);
 
 
-// Create Grid container
-const gridDiv = document.createElement('div');
-gridDiv.setAttribute('id', 'gridDiv');
-etchAsketch.appendChild(gridDiv);
-
-// Create grid - Etch-A-Sketch child - 'draw-able' area
-let divGrid = [];
-for(let i = 0; i < 256; i++) {
-    divGrid[i] = document.createElement("div"); // create
-    divGrid[i].setAttribute('class', 'gridlet'); // add styling
-    gridDiv.appendChild(divGrid[i]); // add to dom
-    divGrid[i].addEventListener('mouseover', changeColor); // change  on hover    
-}
+// Sketch area div
+const sketchArea = document.createElement('div');
+sketchArea.setAttribute('id', 'sketchArea');
+etchAsketch.appendChild(sketchArea);
 
 
-// Create left popup - logoDiv child
-const popup = document.createElement('div');
-popup.setAttribute('id', 'popup');
-popup.style.display = 'none'; // hide
-logoDiv.appendChild(popup);// add to logoDiv
+// Right (about) popup 
+const popupR = document.createElement('div');
+popupR.setAttribute('id', 'popupR');
+popupR.style.display = 'none'; // hide
+logoDiv.appendChild(popupR);// add to logoDiv
 
-// Create right popup - logoDiv child
-const popup2 = document.createElement('div');
-popup2.setAttribute('id', 'popup2');
-popup2.style.display = 'none'; // hide
-logoDiv.appendChild(popup2);// add to logoDiv
+// Left (dimensions) popup
+const popupL = document.createElement('div');
+popupL.setAttribute('id', 'popupL');
+popupL.style.display = 'none'; // hide
+logoDiv.appendChild(popupL);// add to logoDiv
+
+const aboutPopup = {
+    content: document.createElement('div'),
+    close: document.createElement('span'),
+    heading: document.createElement('h3'),
+    intro: document.createElement('p'),
+    contact: document.createElement('p'),
+    gitLink: document.createElement('a'),
+    gitIcon: document.createElement('img'),
+    style() {
+        this.content.setAttribute('class', 'aboutPopup'); //content
+        this.content.setAttribute('id', 'popup-right');
+        this.close.setAttribute('class', 'close'); //close icon
+        this.close.textContent = '✕';
+        this.heading.textContent = "About Me"; // heading
+        this.intro.textContent = "My name is Kat de Vay, and I am a full-stack web developer."; // body text
+        this.contact.textContent = "Check out my other projects by following the github link below.";
+        this.gitLink.setAttribute('href', 'https://github.com/kdevay'); // Github link
+        this.gitIcon.setAttribute('alt', 'octocat');
+        this.gitIcon.setAttribute('src', 'octocat.png');
+    },
+    build() {
+        popupR.appendChild(this.content);
+        this.content.appendChild(this.close);
+        this.content.appendChild(this.heading);
+        this.content.appendChild(this.intro);
+        this.content.appendChild(this.contact);
+        this.gitLink.appendChild(this.gitIcon);
+        this.content.appendChild(this.gitLink);
+    },
+    hide() {
+        popupR.style.display = "none";
+    }
+};
+
+const dimensionsPopup = { 
+    content: document.createElement('div'),
+    close: document.createElement('span'),
+    heading: document.createElement('h3'),
+    midText1: document.createElement('p'),
+    midText2: document.createElement('p'),
+    midText3: document.createElement('p'),
+    slider: document.createElement('input'),
+    sliderDiv: document.createElement('div'),
+    subText: document.createElement('p'),
+    dimensions: document.createElement('span'),
+    lineBreak: document.createElement('br'),
+    lineBreak2: document.createElement('br'),
+    submit: document.createElement('button'),
+    style () {
+        this.content.setAttribute('class', 'dimensionsPopup');
+        this.close.setAttribute('class', 'close'); // Close icon
+        this.close.textContent = '✕';
+        this.heading.textContent = "Create new sketch"; // Text
+        this.midText1.setAttribute('class', 'midText');
+        this.midText1.textContent = "For more detail, choose larger dimensions.";
+        this.midText2.setAttribute('class', 'midText');
+        this.midText2.textContent = "For less detail, choose a smaller dimensions.";
+        this.midText3.setAttribute('class', 'midText');
+        this.midText3.textContent = "To return to your sketch, exit this window.";
+        this.sliderDiv.setAttribute('class', 'slidecontainer'); // Slider container
+        this.slider.setAttribute('id', 'slider'); // Slider
+        this.slider.setAttribute('value', '16');
+        this.slider.setAttribute('max', '100');
+        this.slider.setAttribute('min', '16');
+        this.slider.setAttribute('type', 'range');
+        this.subText.textContent = 'Dimensions:\u00A0\u00A0'; // Dimensions label
+        this.subText.setAttribute('class', 'dimensionLabel');
+        this.dimensions.setAttribute('id', 'dimensions'); // Dimensions output
+        this.dimensions.textContent = 16 + ' x ' + 16;
+        this.submit.setAttribute('class', 'submit');
+        this.submit.textContent = 'create';
+    },
+    build () {
+        popupL.appendChild(this.content);
+        this.content.appendChild(this.close);
+        this.content.appendChild(this.heading);
+        this.content.appendChild(this.midText1);
+        this.content.appendChild(this.midText2);
+        this.content.appendChild(this.midText3);
+        this.content.appendChild(document.createElement('br'));
+        this.content.appendChild(this.sliderDiv);
+        this.sliderDiv.appendChild(this.slider);
+        this.sliderDiv.appendChild(this.subText);
+        this.sliderDiv.appendChild(this.dimensions);
+        this.sliderDiv.appendChild(this.lineBreak);
+        this.sliderDiv.appendChild(this.lineBreak2);
+        this.sliderDiv.appendChild(document.createElement('br'));
+        this.sliderDiv.appendChild(document.createElement('br'));
+        this.sliderDiv.appendChild(this.submit);
+    },
+    hide(){
+        popupL.style.display = "none";
+    }
+};
 
 
+const grid = {
+    width: 550,
+    borderWidth: 3,
+    pixelBorderWidth: 2,
+    pixels: [],
+    clear() {
+        if (this.pixels === []) return;
+        for(let i = 0; i < this.pixels.length; i++){
+            this.pixels[i].remove();
+        }
+    },
+    getPixelWidth(pixelCount) {
+        return ((this.width - this.borderWidth) / pixelCount) - this.pixelBorderWidth;
+    },
+    getPixelCount() {
+        let input = dimensionsPopup.dimensions.textContent;
+        return !input ? 16 : parseInt(input.slice(0, input.search(" ")));
+    },
+    populate() {
+        const pixelCount = this.getPixelCount(); // Get pixel count
+        const totalPixels = pixelCount * pixelCount; // Get total pixel count
+        const pixelWidth = this.getPixelWidth(pixelCount); // Get pixel width
+        console.log('pixelCountAcross: ', pixelCount);
+        console.log('pixelWidth: ', pixelWidth);
+    
+        // Clear grid
+        this.clear()
+        
+        // Create new grid
+        for(let i = 0; i < totalPixels; i++) {
+            this.pixels.push(document.createElement("div")); // create new div
+            this.pixels[i].setAttribute('class', 'pixel');
+            this.pixels[i].setAttribute('style', `width: ${pixelWidth}px; height: ${pixelWidth}px;`);
+            this.pixels[i].addEventListener('mouseover', changeColor); // Add color change on hover
+            
+            sketchArea.appendChild(this.pixels[i]); // add to dom
+        }
+        console.log('pixels: ', this.pixels);
+        dimensionsPopup.hide();
+    }
+};
 
-// Create dials 
+// Dial div
 const dialDiv = document.createElement('div'); // dial container
 dialDiv.setAttribute('class', 'dialDiv');
 etchAsketch.appendChild(dialDiv);
-// left dial
+
+// left dial - opens 'dimensions' popup
 const leftDial = document.createElement('button'); 
 leftDial.setAttribute('class', 'dial');
 leftDial.setAttribute('title', 'resize grid');
-leftDial.onclick = function openPopup() { // open popup on click
-    popup.style.display = "block"; 
-};
 dialDiv.appendChild(leftDial); // add to dial div
-// right dial
+
+// right dial - opens 'about' popup
 const rightDial = document.createElement('button');
 rightDial.setAttribute('class', 'dial');
 rightDial.setAttribute('title', 'about me');
-rightDial.onclick = function openAboutPopup() { // open about popup on click
-    popup2.style.display = "block";
-};
 dialDiv.appendChild(rightDial); // add to dial div
 
-
-
-// LEFT popup content 
-const popupContent = document.createElement('div');
-popupContent.setAttribute('class', 'dimensionsPopup');
-popup.appendChild(popupContent); // add to popup div
-
-// Close Icon - left popup content child
-const closeIcon = document.createElement('span');
-closeIcon.setAttribute('class', 'close');
-closeIcon.textContent = '✕';
-closeIcon.onclick = function() {popup.style.display = "none";}; // hide popup on click
-popupContent.appendChild(closeIcon);// add close icon to popup
-
-// Heading - left popup content child
-const popupHeading = document.createElement('h3');
-popupHeading.textContent = "Create new sketch";
-popupContent.appendChild(popupHeading);
-
-// Paragraph - left popup content child
-const midText1 = document.createElement('p');
-midText1.setAttribute('class', 'midText');
-midText1.textContent = "For more detail, choose larger dimensions.";
-popupContent.appendChild(midText1);
-const midText2 = document.createElement('p');
-midText2.setAttribute('class', 'midText');
-midText2.textContent = "For less detail, choose a smaller dimensions.";
-popupContent.appendChild(midText2);
-const midText3 = document.createElement('p');
-midText3.setAttribute('class', 'midText');
-midText3.textContent = "To return to your sketch, exit this window.";
-popupContent.appendChild(midText3);
-popupContent.appendChild(document.createElement('br'));
-
-
-// Slider container - left popup content child
-const sliderDiv = document.createElement('div');
-sliderDiv.setAttribute('class', 'slidecontainer');
-popupContent.appendChild(sliderDiv);
-
-// Slider - slider child
-const slider = document.createElement('input');
-slider.setAttribute('id', 'slider');
-slider.setAttribute('value', '16');
-slider.setAttribute('max', '100');
-slider.setAttribute('min', '16');
-slider.setAttribute('type', 'range');
-sliderDiv.appendChild(slider);
-
-// Dimensions label - slider child
-const subText = document.createElement('p');
-subText.textContent = 'Dimensions:\u00A0\u00A0';
-subText.setAttribute('class', 'dimensionLabel');
-sliderDiv.appendChild(subText);
-
-// Dimensions output - slider child
-const dimensions = document.createElement('span');
-dimensions.setAttribute('id', 'dimensions');
-dimensions.textContent = '';
-sliderDiv.appendChild(dimensions);
-
-// Add spacing - slider child
-const lineBreak = document.createElement('br');
-sliderDiv.appendChild(lineBreak);
-const lineBreak2 = document.createElement('br');
-sliderDiv.appendChild(lineBreak2);
-
-// add slider input to dimensions output
-slider.oninput = function() {
-    dimensions.textContent = this.value + ' x ' + this.value;
+// Events
+aboutPopup.close.onclick = () => popupR.style.display = "none"; // close about popup
+dimensionsPopup.close.onclick = () => popupL.style.display = "none"; // close dimensions popup
+// Display popups on dial clicks
+leftDial.onclick = () => popupL.style.display = "block";
+rightDial.onclick = () => popupR.style.display = "block";
+// Add slider input to dimensions output
+dimensionsPopup.slider.oninput = function () { 
+    dimensionsPopup.dimensions.textContent = this.value + ' x ' + this.value;
+};
+dimensionsPopup.submit.onclick = function () {// generate new grid
+    console.log('entered');
+    grid.populate();
 }
 
-// Submit button - slider child
-sliderDiv.appendChild(document.createElement('br'));
-sliderDiv.appendChild(document.createElement('br'));
-const submit = document.createElement('button');
-submit.setAttribute('class', 'submit');
-submit.textContent = 'create';
-// On submit, generate new grid
-submit.onclick = function refreshGrid(event) {
-    let input = dimensions.textContent;
-    if (!dimensions.textContent) {
-        input = 16; // set default to 16 px
-    } else {
-            let index = input.search(" ");
-            input = parseInt(input.slice(0, index));
-    }
-    // Calculate new width/height of each gridlet
-    let width = (550 / input) - 3.5 + "px";// content size / number of divs - border thickness
-
-    // Clear old grid
-    for(let i = 0; i < divGrid.length; i++){
-        divGrid[i].remove();
-    }
-    
-    // Create new grid
-    for(let i = 0; i < input ** 2; i++) {
-        divGrid[i]=document.createElement("div");// create new div
-        divGrid[i].setAttribute('class', 'gridlet');
-        divGrid[i].setAttribute('style', `width: ${width}; height: ${width};`);
-        divGrid[i].addEventListener('mouseover', changeColor);// Add color change on hover
-        gridDiv.appendChild(divGrid[i]); // add to dom
-    }
-    popup.style.display = "none";
-}
-sliderDiv.appendChild(submit);
-
-
-
-
-//// Right popup ////
-// Right popup content 
-const popupContent2 = document.createElement('div');
-popupContent2.setAttribute('class', 'aboutPopup');
-popupContent2.setAttribute('id', 'popup-right');
-popup2.appendChild(popupContent2); // add to popup div
-//**** might have to make a different popup div
-
-// Close Icon - Right popup content child
-const closeIcon2 = document.createElement('span');
-closeIcon2.setAttribute('class', 'close');
-closeIcon2.textContent = '✕';
-closeIcon2.onclick = function() {popup2.style.display = "none";}; // hide popup on click
-popupContent2.appendChild(closeIcon2);// add close icon to popup
-
-// Heading - Right popup content child
-const popupHeading2 = document.createElement('h3');
-popupHeading2.textContent = "About Me";
-popupContent2.appendChild(popupHeading2);
-
-// body - Right popup content child
-const intro = document.createElement('p');
-intro.textContent = "My name is Kat de Vay, and I am a full-stack web developer.";
-const contact = document.createElement('p'); 
-contact.textContent = "Check out my other projects by following the github link below.";
-popupContent2.appendChild(intro);
-popupContent2.appendChild(contact);
-
-// Add github link - Right popup content child
-const gitLink = document.createElement('a');
-gitLink.setAttribute('href', 'https://github.com/kdevay');
-const octocat = document.createElement('img');
-octocat.setAttribute('alt', 'octocat');
-octocat.setAttribute('src', 'octocat.png');
-gitLink.appendChild(octocat);
-popupContent2.appendChild(gitLink);
+// startup tasks
+aboutPopup.style();
+aboutPopup.build();
+aboutPopup.hide();
+dimensionsPopup.style();
+dimensionsPopup.build();
+dimensionsPopup.hide();
+grid.populate();
