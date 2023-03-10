@@ -26,7 +26,7 @@ body {
   justify-content: center;
 }
 
-#content {
+#etchAsketch {
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -58,7 +58,7 @@ h1 {
   margin: 5px 0px 0px 0px;
 }
 
-#heading {
+#logoDiv {
   background-color: #eb4034;
   border: none;
   padding: 5px 5px;
@@ -162,13 +162,20 @@ button.submit:hover{
 }
 
 /* popup content */
-.popup-content {
+.dimensionsPopup{
   background-color: #bfb9ac;
-  margin: 15% auto;
+  margin: 40vh 10vw 0 10vw;
   padding: 20px;
   border: 1px solid #888;
   border-radius: 20px;
-  width: 80%;
+}
+.aboutPopup {
+  background-color: #bfb9ac;
+  margin: 30vh auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 20px;
+  width: 55vw;
 }
 
 /* Close button */
